@@ -15,6 +15,7 @@ class FireParticles extends PositionComponent {
     double height = 18,
     double width = 6,
     List<ColorTween>? colors,
+    this.duration,
     super.position,
     super.priority,
   }) {
@@ -45,6 +46,8 @@ class FireParticles extends PositionComponent {
 
   late final List<ColorTween> colors;
 
+  final double? duration;
+
   @override
   FutureOr<void> onLoad() async {
     await super.onLoad();
@@ -56,6 +59,15 @@ class FireParticles extends PositionComponent {
         onTick: _emmit,
       ),
     );
+
+    if (duration != null) {
+      add(
+        TimerComponent(
+          period: duration!,
+          onTick: removeFromParent,
+        ),
+      );
+    }
   }
 
   void _emmit() {
