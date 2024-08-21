@@ -1,6 +1,7 @@
 import 'package:example/game.dart';
 import 'package:flame/game.dart';
 import 'package:flame_juice_box/effects.dart';
+import 'package:flame_juice_box/particles.dart';
 import 'package:flutter/material.dart';
 import 'package:nes_ui/nes_ui.dart';
 
@@ -53,65 +54,95 @@ class FlameJuiceBoxExample extends StatelessWidget {
             body: Padding(
               padding: const EdgeInsets.all(16),
               child: NesContainer(
-                child: Column(
-                  children: [
-                    const SizedBox(height: 16),
-                    SizedBox.square(
-                      dimension: 150,
-                      child: Image.asset('assets/flame_juice_box.png'),
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      'Flame Juice Box',
-                      style: Theme.of(context).textTheme.displayMedium,
-                    ),
-                    const SizedBox(height: 32),
-                    const Divider(),
-                    const SizedBox(height: 16),
-                    Wrap(
-                      spacing: 16,
-                      children: [
-                        ExampleContainer(
-                          title: 'Bounce Effect',
-                          child: GameWidget.controlled(
-                            gameFactory: () => FlameJuiceBoxGame(
-                              children: [
-                                GreenSquare(
-                                  children: [
-                                    BounceEffect(Vector2(0, -50)),
-                                  ],
-                                ),
-                              ],
+                child: NesSingleChildScrollView(
+                  child: Column(
+                    children: [
+                      const SizedBox(height: 16),
+                      SizedBox.square(
+                        dimension: 150,
+                        child: Image.asset('assets/flame_juice_box.png'),
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        'Flame Juice Box',
+                        style: Theme.of(context).textTheme.displayMedium,
+                      ),
+                      const SizedBox(height: 32),
+                      const Divider(),
+                      const SizedBox(height: 16),
+                      Text(
+                        'Effects',
+                        style: Theme.of(context).textTheme.displayMedium,
+                      ),
+                      const SizedBox(height: 32),
+                      Wrap(
+                        spacing: 16,
+                        children: [
+                          ExampleContainer(
+                            title: 'Bounce Effect',
+                            child: GameWidget.controlled(
+                              gameFactory: () => FlameJuiceBoxGame(
+                                children: [
+                                  GreenSquare(
+                                    children: [
+                                      BounceEffect(Vector2(0, -50)),
+                                    ],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        ExampleContainer(
-                          title: 'Spin Effect',
-                          child: GameWidget.controlled(
-                            gameFactory: () => FlameJuiceBoxGame(
-                              children: [
-                                GreenSquare(
-                                  children: [SpinEffect()],
-                                ),
-                              ],
+                          ExampleContainer(
+                            title: 'Spin Effect',
+                            child: GameWidget.controlled(
+                              gameFactory: () => FlameJuiceBoxGame(
+                                children: [
+                                  GreenSquare(
+                                    children: [SpinEffect()],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                        ExampleContainer(
-                          title: 'Pulse Effect',
-                          child: GameWidget.controlled(
-                            gameFactory: () => FlameJuiceBoxGame(
-                              children: [
-                                GreenSquare(
-                                  children: [PulseEffect()],
-                                ),
-                              ],
+                          ExampleContainer(
+                            title: 'Pulse Effect',
+                            child: GameWidget.controlled(
+                              gameFactory: () => FlameJuiceBoxGame(
+                                children: [
+                                  GreenSquare(
+                                    children: [PulseEffect()],
+                                  ),
+                                ],
+                              ),
                             ),
                           ),
-                        ),
-                      ],
-                    ),
-                  ],
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        'Particles',
+                        style: Theme.of(context).textTheme.displayMedium,
+                      ),
+                      const SizedBox(height: 32),
+                      Wrap(
+                        spacing: 16,
+                        children: [
+                          ExampleContainer(
+                            title: 'Fire Particles',
+                            child: GameWidget.controlled(
+                              gameFactory: () => FlameJuiceBoxGame(
+                                children: [
+                                  FireParticles(
+                                    lifespan: 20,
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),
