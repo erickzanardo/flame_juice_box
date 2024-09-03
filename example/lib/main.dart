@@ -1,5 +1,7 @@
 import 'package:example/game.dart';
+import 'package:flame/components.dart';
 import 'package:flame/game.dart';
+import 'package:flame_juice_box/components.dart';
 import 'package:flame_juice_box/effects.dart';
 import 'package:flame_juice_box/particles.dart';
 import 'package:flutter/material.dart';
@@ -137,6 +139,46 @@ class FlameJuiceBoxExample extends StatelessWidget {
                                   ),
                                 ],
                               ),
+                            ),
+                          ),
+                        ],
+                      ),
+                      const SizedBox(height: 16),
+                      Text(
+                        'Components',
+                        style: Theme.of(context).textTheme.displayMedium,
+                      ),
+                      const SizedBox(height: 32),
+                      Wrap(
+                        spacing: 16,
+                        children: [
+                          ExampleContainer(
+                            title: 'Float and Fade Component',
+                            child: GameWidget.controlled(
+                              gameFactory: () {
+                                late final FlameJuiceBoxGame game;
+
+                                // ignore: join_return_with_assignment
+                                game = FlameJuiceBoxGame(
+                                  children: [
+                                    TimerComponent(
+                                      period: 2,
+                                      repeat: true,
+                                      onTick: () {
+                                        game.world.add(
+                                          FloatAndFadeComponent(
+                                            anchor: Anchor.center,
+                                            offset: Vector2(0, -50),
+                                            child: GreenSquare(),
+                                          ),
+                                        );
+                                      },
+                                    ),
+                                  ],
+                                );
+
+                                return game;
+                              },
                             ),
                           ),
                         ],
