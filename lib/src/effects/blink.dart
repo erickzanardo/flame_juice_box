@@ -5,9 +5,11 @@ import 'package:flame/components.dart';
 class BlinkEffect extends Component with ParentIsA<HasPaint> {
   BlinkEffect({
     this.interval = 0.5,
+    this.resetOpacityValue = 1.0,
   });
 
   final double interval;
+  final double resetOpacityValue;
 
   @override
   FutureOr<void> onLoad() async {
@@ -30,7 +32,7 @@ class BlinkEffect extends Component with ParentIsA<HasPaint> {
 
   @override
   void onRemove() {
-    parent.opacity = 1;
+    parent.opacity = resetOpacityValue;
     super.onRemove();
   }
 }
